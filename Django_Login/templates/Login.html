@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <section class="form__wrapper">
+        <form action="" method="post" class="form form-active" id="login-form">
+            {% csrf_token %}
+            <h1 class="form__title">Login</h1>
+            <div class="form__content">
+                <div class="form__box">
+                    <i class="ri-mail-line form__icon"></i>
+                    <div class="form__box-input">
+                        <input for="UserName" type="text" class="form__input" placeholder=" " name="UserName" />
+                        <label for="UserName" class="form__label">User name</label>
+                    </div>
+                </div>
+                <div class="form__box">
+                    <i class="ri-lock-2-line form__icon"></i>
+                    <div class="form__box-input">
+                        <input for="password" type="password" class="form__input" placeholder=" " id="login-pass" name="Password"/>
+                        <label for="password" class="form__label">Password</label>
+                        <i class="ri-eye-off-line form__eye" id="login-eye"></i>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="form__button">Login</button>
+            <p class="login__register">
+                Don't have an account? <a id="register-btn" href="{% url 'Register' %}">Register</a>
+            </p>
+        </form>
+    </section>
+
+    <div class="container">
+		{% if messages %}
+			<div id="alert-message" class="alert alert-success" role="alert">
+                {% for message in messages %}
+                    {{message}}
+                {% endfor %}
+			</div>
+		{% endif %}
+    </div>
+
+    <script>
+		// Thông báo message hiện lên một khoảng thời gian rồi tự động tắt
+		setTimeout(function() {
+			var alertMessage = document.getElementById('alert-message');
+			alertMessage.style.display = 'none';
+		}, 5000);
+    </script>
+</body>
+</html>

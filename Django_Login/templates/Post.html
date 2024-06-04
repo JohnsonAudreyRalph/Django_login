@@ -1,0 +1,31 @@
+{% extends "Base.html" %}
+{% block title %}Post{% endblock title %}
+{% block content %}
+<div class="d-flex justify-content-center mb-5">
+    <div class="card col-md-11">
+        <div class="card-body">
+            <form class="row g-3" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="col-md-4">
+                    <label class="form-label">Upload ảnh</label>
+                    <input type="file" class="form-control" name="image" required="">
+                </div>
+
+                <div class="col-md-8">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-control" name="title" required="">
+                </div>
+
+                <div class="col-md-12">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" required="" style="height: 50px" name="description"></textarea>
+                </div>
+                
+                <div class="col-12 justify-content-center d-flex">
+                    <button class="btn btn-primary" type="submit">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

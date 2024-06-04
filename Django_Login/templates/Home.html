@@ -1,0 +1,33 @@
+{% extends "Base.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+    {% for post_all in All_Post %}
+        <div class="d-flex justify-content-center mb-5">
+            <div class="card col-md-11">
+                <div class="row g-0">
+                    <div class="col-md-4 justify-content-center d-flex">
+                        <img src="{% static '/' %}{{ post_all.image }}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="card-title">{{post_all.title}}</h5>
+                                {% if user == post_all.author %}
+                                    <form action="{% url 'Delete' post_all.id %}" method="post" class='d-inline'>
+                                        {% csrf_token %}
+                                        <button class="btn btn-danger btn-sm" type='submit'>
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                            <hr>
+                            <p class="card-text">{{post_all.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}
